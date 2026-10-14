@@ -1,0 +1,277 @@
+# ============================================================
+#  Pages CMS config for natalogue
+#  This file builds Nat's editor at https://app.pagescms.org
+#  Each block below becomes a section in the editor's sidebar.
+# ============================================================
+
+media:
+  - name: entry_images
+    label: Entry photos
+    input: assets/img/entries
+    output: /assets/img/entries
+    rename: safe
+    categories: [image]
+  - name: gallery
+    label: Gallery photos
+    input: assets/img/gallery
+    output: /assets/img/gallery
+    rename: safe
+    categories: [image]
+
+content:
+  # ---------------------------------------------------------- entries
+  - name: entries
+    label: Entries
+    type: collection
+    path: _entries
+    format: yaml-frontmatter
+    filename:
+      template: "{primary}.md"
+      field: create
+    view:
+      fields: [title, date]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: date
+        label: Date
+        description: Entries are numbered as rows in date order.
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: summary
+        label: One-line summary
+        description: Optional. Shows under the title in the list of entries.
+        type: string
+      - name: listening
+        label: Listening to
+        description: Optional. What you were listening to while writing.
+        type: string
+      - name: body
+        label: Writing
+        type: rich-text
+        options:
+          format: markdown
+          media: entry_images
+
+  # ---------------------------------------------------------- shelves
+  - name: shelves
+    label: Shelves
+    type: file
+    path: _data/shelves.yml
+    format: yaml
+    fields:
+      - name: currently
+        label: Currently consuming
+        description: What you're in the middle of. The first three also show on the homepage.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - name: title
+            label: Title
+            type: string
+            required: true
+          - name: type
+            label: Type
+            description: Picks the little pixel icon.
+            type: select
+            options:
+              values:
+                - name: book
+                  label: Book
+                - name: show
+                  label: Show
+                - name: film
+                  label: Film
+                - name: music
+                  label: Music
+                - name: game
+                  label: Game
+                - name: podcast
+                  label: Podcast
+                - name: other
+                  label: Something else
+          - name: by
+            label: By
+            description: Author, creator, director, or artist. Optional.
+            type: string
+          - name: progress
+            label: How far along
+            description: Optional, like "ep 4 of 12" or "page 90".
+            type: string
+          - name: note
+            label: Note
+            description: Optional. A line in your own words.
+            type: string
+      - name: favorites
+        label: Favorites
+        description: The keepers.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - name: title
+            label: Title
+            type: string
+            required: true
+          - name: type
+            label: Type
+            description: Picks the little pixel icon.
+            type: select
+            options:
+              values:
+                - name: book
+                  label: Book
+                - name: show
+                  label: Show
+                - name: film
+                  label: Film
+                - name: music
+                  label: Music
+                - name: game
+                  label: Game
+                - name: podcast
+                  label: Podcast
+                - name: other
+                  label: Something else
+          - name: by
+            label: By
+            description: Author, creator, director, or artist. Optional.
+            type: string
+          - name: progress
+            label: How far along
+            description: Optional, like "ep 4 of 12" or "page 90".
+            type: string
+          - name: note
+            label: Note
+            description: Optional. A line in your own words.
+            type: string
+
+  # ---------------------------------------------------------- about
+  - name: about
+    label: About page
+    type: file
+    path: about.md
+    format: yaml-frontmatter
+    fields:
+      - name: body
+        label: About you
+        type: rich-text
+        options:
+          format: markdown
+          media: entry_images
+      # page plumbing, kept hidden so saving never breaks the page
+      - name: layout
+        type: string
+        hidden: true
+        default: page
+      - name: title
+        type: string
+        hidden: true
+        default: about
+      - name: permalink
+        type: string
+        hidden: true
+        default: /about/
+
+  # ---------------------------------------------------------- gallery
+  - name: gallery
+    label: Gallery
+    type: file
+    path: _data/gallery.yml
+    format: yaml
+    list: true
+    fields:
+      - name: image
+        label: Photo
+        type: image
+        required: true
+        options:
+          media: gallery
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: note
+        label: Note
+        description: Optional, like "six weeks, two skeins short".
+        type: string
+      - name: alt
+        label: Photo description
+        description: Describe the photo for people using screen readers, like "a blue and white blanket draped over a chair".
+        type: string
+
+  # ---------------------------------------------------------- settings
+  - name: settings
+    label: Site settings
+    type: file
+    path: _data/settings.yml
+    format: yaml
+    fields:
+      - name: tagline
+        label: Tagline
+        description: The line under the big title on the homepage.
+        type: string
+      - name: description
+        label: Search description
+        description: How the site is described in search results and link previews.
+        type: text
+      - name: author
+        label: Your name
+        description: Shown in the footer.
+        type: string
+      - name: lace_words
+        label: Lace words
+        description: The words worked into the lace at the bottom of every page.
+        type: string
+      - name: playlist_url
+        label: Spotify playlist link
+        description: In Spotify, open the playlist, then Share > Copy link to playlist, and paste it here. Leave empty to show "coming soon".
+        type: string
+      - name: show_gallery
+        label: Show the gallery in the menu
+        type: boolean
+      - name: links
+        label: Links elsewhere
+        description: Shown on the elsewhere page and in the footer.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{label}"
+        fields:
+          - name: label
+            label: Name
+            description: Like "instagram".
+            type: string
+            required: true
+          - name: handle
+            label: Handle
+            description: Like "@nnonacf".
+            type: string
+          - name: url
+            label: Link
+            type: string
+            required: true
+
+settings:
+  commit:
+    identity: user   # commits show who made the change
+    templates:
+      create: "Add {path} (via editor)"
+      update: "Update {path} (via editor)"
+      delete: "Delete {path} (via editor)"
+      rename: "Rename {oldPath} to {newPath} (via editor)"
