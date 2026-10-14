@@ -4,7 +4,7 @@ layout: default
 {% assign entries = site.entries | sort: "date" | reverse %}
 {% assign total = entries | size %}
 
-<p class="tagline">{{ site.tagline }}</p>
+<p class="tagline">{{ site.data.settings.tagline }}</p>
 
 <div class="home-grid">
   <section class="home-block home-entries" aria-labelledby="h-entries">
@@ -37,8 +37,8 @@ layout: default
 
   <section class="home-block home-listening" aria-labelledby="h-listen">
     <h2 id="h-listen" class="px-head"><a href="{{ '/listening/' | relative_url }}">currently listening</a></h2>
-    {% if site.playlist_url != "" %}
-      <p>An ever-growing playlist. <a href="{{ site.playlist_url }}" target="_blank" rel="noopener">Open it in Spotify</a> or <a href="{{ '/listening/' | relative_url }}">play it here</a>.</p>
+    {% if site.data.settings.playlist_url and site.data.settings.playlist_url != "" %}
+      <p>An ever-growing playlist. <a href="{{ site.data.settings.playlist_url }}" target="_blank" rel="noopener">Open it in Spotify</a> or <a href="{{ '/listening/' | relative_url }}">play it here</a>.</p>
     {% else %}
       <p class="empty">The playlist is still being stitched together.</p>
     {% endif %}

@@ -4,12 +4,12 @@ title: listening
 permalink: /listening/
 intro: An ever-growing playlist. Songs get added, never taken off.
 ---
-{% if site.playlist_url != "" %}
-  {% assign embed = site.playlist_url | split: "?" | first | replace: "open.spotify.com/", "open.spotify.com/embed/" %}
+{% if site.data.settings.playlist_url and site.data.settings.playlist_url != "" %}
+  {% assign embed = site.data.settings.playlist_url | split: "?" | first | replace: "open.spotify.com/", "open.spotify.com/embed/" %}
   <div class="player">
     <iframe title="Nat's playlist on Spotify" src="{{ embed }}?utm_source=generator&theme=0" width="100%" height="480" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
   </div>
-  <p><a href="{{ site.playlist_url }}" target="_blank" rel="noopener">Open the playlist in Spotify</a></p>
+  <p><a href="{{ site.data.settings.playlist_url }}" target="_blank" rel="noopener">Open the playlist in Spotify</a></p>
 {% else %}
   <div class="player player--empty">
     <p class="empty">The playlist is still being stitched together. Check back soon.</p>

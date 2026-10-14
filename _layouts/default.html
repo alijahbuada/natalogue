@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
-  <meta name="description" content="{% if page.summary %}{{ page.summary | strip_html | escape }}{% else %}{{ site.description | escape }}{% endif %}">
+  <meta name="description" content="{% if page.summary %}{{ page.summary | strip_html | escape }}{% else %}{{ site.data.settings.description | escape }}{% endif %}">
   <meta name="theme-color" content="#f8fafd">
   <link rel="icon" href="{{ '/assets/img/favicon.svg' | relative_url }}" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,7 +27,8 @@
     </header>
 
     <main id="main">
-      {{ content }}
+      {% assign asset_src = 'src="' | append: site.baseurl | append: '/assets/' %}
+      {{ content | replace: 'src="/assets/', asset_src }}
     </main>
   </div>
 
@@ -35,11 +36,11 @@
     {% include lace.html %}
     <div class="footer-inner page">
       <ul class="footer-links">
-        {% for link in site.links %}
+        {% for link in site.data.settings.links %}
           <li><a href="{{ link.url }}" rel="me noopener" target="_blank">{{ link.label }}</a></li>
         {% endfor %}
       </ul>
-      <p class="footer-note">natalogue, kept by {{ site.author }}</p>
+      <p class="footer-note">natalogue, kept by {{ site.data.settings.author }}</p>
     </div>
   </footer>
 </body>

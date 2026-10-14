@@ -1,7 +1,7 @@
 <nav class="nav" aria-label="main">
   <ul>
     {% for item in site.data.nav %}
-      {% if item.gallery_only and site.show_gallery != true %}{% continue %}{% endif %}
+      {% if item.gallery_only and site.data.settings.show_gallery != true %}{% continue %}{% endif %}
       <li><a href="{{ item.url | relative_url }}"{% if page.url contains item.url %} aria-current="page"{% endif %}>{{ item.title }}</a></li>
     {% endfor %}
   </ul>

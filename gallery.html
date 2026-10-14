@@ -9,7 +9,8 @@ intro: Crochet pieces and other things made by hand.
     {% for piece in site.data.gallery %}
       <li class="piece">
         <figure>
-          <img src="{{ piece.image | prepend: '/assets/img/gallery/' | relative_url }}" alt="{{ piece.alt | default: piece.title }}" loading="lazy">
+          {% if piece.image contains "/" %}{% assign img = piece.image %}{% else %}{% assign img = piece.image | prepend: '/assets/img/gallery/' %}{% endif %}
+          <img src="{{ img | relative_url }}" alt="{{ piece.alt | default: piece.title }}" loading="lazy">
           <figcaption>
             <span class="piece-title">{{ piece.title }}</span>
             {% if piece.note %}<span class="piece-note">{{ piece.note }}</span>{% endif %}

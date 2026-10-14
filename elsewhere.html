@@ -5,7 +5,7 @@ permalink: /elsewhere/
 intro: Where else to find me.
 ---
 <ul class="elsewhere">
-  {% for link in site.links %}
+  {% for link in site.data.settings.links %}
     <li>
       <a href="{{ link.url }}" rel="me noopener" target="_blank">
         <span class="els-label">{{ link.label }}</span>

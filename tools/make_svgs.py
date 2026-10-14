@@ -145,7 +145,7 @@ def lace():
         f'<g class="lace-holes">{eyelets}{"".join(scallop_holes)}</g>'
         f'<g class="lace-picots">{picots}</g>'
         '<text class="lace-words" x="10" y="34">'
-        "{% for i in (1..14) %}{{ site.lace_words }} &#10047; {% endfor %}"
+        "{% for i in (1..14) %}{{ site.data.settings.lace_words }} &#10047; {% endfor %}"
         "</text>"
         "</svg></div>\n"
     )

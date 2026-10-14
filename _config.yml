@@ -1,36 +1,12 @@
 # ============================================================
-#  natalogue · site settings
-#  Nat: the lines marked "edit me" are safe to change.
-#  After saving, the site updates in about a minute.
+#  natalogue · site plumbing
+#  Nat: you don't need this file. Your settings (tagline, links,
+#  playlist, lace words, gallery switch) live in the editor under
+#  "Site settings", or in _data/settings.yml.
 # ============================================================
 
-title: natalogue                       # edit me (the name in the browser tab)
-tagline: a running catalogue of what i'm making, reading, watching, and figuring out   # edit me
-description: Nat's notebook on the internet. Entries, shelves, a playlist, and things made by hand.   # edit me (shows up in search results)
-author: Nat                            # edit me
+title: natalogue
 
-# The words worked into the lace trim at the bottom of every page.  # edit me
-lace_words: one stitch, one square, one row at a time
-
-# Your Spotify playlist link. Copy it from Spotify (Share > Copy link to playlist)
-# and paste it between the quotes. Leave it empty to show "coming soon".   # edit me
-playlist_url: ""
-
-# Turn the art gallery on when you're ready: change false to true.   # edit me
-show_gallery: false
-
-# Where to find you elsewhere. Add, remove, or reorder freely.   # edit me
-links:
-  - label: instagram
-    handle: "@nnonacf"
-    url: https://www.instagram.com/nnonacf/
-  - label: goodreads
-    handle: "@natalihn"
-    url: https://www.goodreads.com/natalihn
-
-# ------------------------------------------------------------
-#  Below here is plumbing. No need to touch it.
-# ------------------------------------------------------------
 url: "https://alijahbuada.github.io"   # test host; change when it moves to Nat
 baseurl: "/natalogue"   # repo name; set to "" if the repo is <username>.github.io
 

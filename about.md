@@ -4,7 +4,7 @@ title: about
 permalink: /about/
 ---
 
-*Nat: everything on this page is a placeholder. Open `about.md` on GitHub, click the pencil, and write over it in your own words.*
+*Nat: everything on this page is a placeholder. Open **About page** in your editor and write over it in your own words.*
 
 Hi, I'm Nat.
 
