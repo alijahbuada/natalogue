@@ -1,0 +1,23 @@
+---
+layout: page
+title: gallery
+permalink: /gallery/
+intro: Crochet pieces and other things made by hand.
+---
+{% if site.data.gallery.size > 0 %}
+  <ul class="gallery">
+    {% for piece in site.data.gallery %}
+      <li class="piece">
+        <figure>
+          <img src="{{ piece.image | prepend: '/assets/img/gallery/' | relative_url }}" alt="{{ piece.alt | default: piece.title }}" loading="lazy">
+          <figcaption>
+            <span class="piece-title">{{ piece.title }}</span>
+            {% if piece.note %}<span class="piece-note">{{ piece.note }}</span>{% endif %}
+          </figcaption>
+        </figure>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p class="empty">Pieces are still on the hook. The first ones go up soon.</p>
+{% endif %}

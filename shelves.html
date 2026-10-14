@@ -1,0 +1,31 @@
+---
+layout: page
+title: shelves
+permalink: /shelves/
+intro: Shows, books, and whatever else I'm in the middle of, plus the ones I keep coming back to.
+---
+<section class="shelf" aria-labelledby="h-current">
+  <h2 id="h-current" class="px-head">currently consuming</h2>
+  {% if site.data.shelves.currently.size > 0 %}
+    <ul class="bands">
+      {% for item in site.data.shelves.currently %}
+        {% include shelf-item.html item=item %}
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="empty">Between things right now.</p>
+  {% endif %}
+</section>
+
+<section class="shelf" aria-labelledby="h-faves">
+  <h2 id="h-faves" class="px-head">favorites</h2>
+  {% if site.data.shelves.favorites.size > 0 %}
+    <ul class="bands">
+      {% for item in site.data.shelves.favorites %}
+        {% include shelf-item.html item=item %}
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="empty">Favorites coming soon.</p>
+  {% endif %}
+</section>

@@ -1,0 +1,12 @@
+# ============================================================
+#  natalogue · gallery
+#  1. Upload a photo into the folder  assets/img/gallery/
+#  2. Add an item here with the photo's exact file name.
+#  3. Turn the gallery on in _config.yml (show_gallery: true).
+#
+#  - image: granny-square-blanket.jpg     (required, exact file name)
+#    title: granny square blanket          (required)
+#    note: six weeks, two skeins short     (optional)
+#    alt: a blue and white blanket draped over a chair   (optional, describes the photo)
+# ============================================================
+[]

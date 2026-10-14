@@ -1,0 +1,24 @@
+---
+layout: page
+title: entries
+permalink: /entries/
+intro: Written one row at a time, newest on top.
+---
+{% assign entries = site.entries | sort: "date" | reverse %}
+{% assign total = entries | size %}
+{% if total > 0 %}
+  <ol class="row-list row-list--full">
+    {% for entry in entries %}
+      <li>
+        <a href="{{ entry.url | relative_url }}">
+          <span class="row-no">row {{ total | minus: forloop.index0 }}</span>
+          <span class="row-title">{{ entry.title }}</span>
+          <time class="row-date" datetime="{{ entry.date | date: '%Y-%m-%d' }}">{{ entry.date | date: "%b %-d, %Y" }}</time>
+          {% if entry.summary %}<span class="row-summary">{{ entry.summary }}</span>{% endif %}
+        </a>
+      </li>
+    {% endfor %}
+  </ol>
+{% else %}
+  <p class="empty">No entries yet. The first one is still on the hook.</p>
+{% endif %}

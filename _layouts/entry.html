@@ -1,0 +1,26 @@
+---
+layout: default
+---
+{% assign earlier = site.entries | where_exp: "e", "e.date <= page.date" %}
+{% assign row_no = earlier | size %}
+{% assign older = site.entries | where_exp: "e", "e.date < page.date" | sort: "date" | last %}
+{% assign newer = site.entries | where_exp: "e", "e.date > page.date" | sort: "date" | first %}
+<article class="entry">
+  <header class="entry-head">
+    <p class="row-tag">row {{ row_no }}</p>
+    <h1 class="entry-title">{{ page.title }}</h1>
+    <p class="entry-meta">
+      <time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%B %-d, %Y" }}</time>
+      {% if page.listening %}<span class="entry-listening">listening to {{ page.listening }}</span>{% endif %}
+    </p>
+  </header>
+
+  <div class="prose">
+    {{ content }}
+  </div>
+
+  <nav class="entry-nav" aria-label="more entries">
+    {% if older %}<a class="older" href="{{ older.url | relative_url }}"><span>previous row</span>{{ older.title }}</a>{% endif %}
+    {% if newer %}<a class="newer" href="{{ newer.url | relative_url }}"><span>next row</span>{{ newer.title }}</a>{% endif %}
+  </nav>
+</article>

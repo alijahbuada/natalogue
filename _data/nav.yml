@@ -1,0 +1,14 @@
+# The menu, in order. "gallery_only" items appear only when show_gallery is true in _config.yml.
+- title: about
+  url: /about/
+- title: entries
+  url: /entries/
+- title: shelves
+  url: /shelves/
+- title: listening
+  url: /listening/
+- title: gallery
+  url: /gallery/
+  gallery_only: true
+- title: elsewhere
+  url: /elsewhere/

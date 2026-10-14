@@ -1,0 +1,361 @@
+/* ============================================================
+   natalogue
+   Engineering graph paper, pixel type, crochet stitches,
+   crayon wax, and a lace trim. Everything sits on a 16px grid:
+   text runs on 32px lines so each line fills two squares.
+   ============================================================ */
+
+:root {
+  color-scheme: light;
+
+  /* paper + pen */
+  --paper: #f8fafd;
+  --paper-white: #ffffff;
+  --grid: rgba(74, 128, 199, 0.16);
+  --grid-major: rgba(74, 128, 199, 0.34);
+  --ink: #233f8c;          /* ballpoint blue, the main color */
+  --ink-soft: #4b63a6;
+  --graphite: #2a2f3a;     /* body text */
+  --muted: #5d6677;
+
+  /* crayon box: used sparingly */
+  --crayon: #dd4f78;       /* oil pastel pink */
+  --wax: #ffe27a;          /* crayon yellow */
+
+  --cell: 16px;
+  --line: 32px;            /* one line of text = two squares */
+  --page: 960px;           /* 60 squares wide */
+
+  --font-px: "Pixelify Sans", ui-monospace, monospace;
+  --font-body: "Newsreader", "Iowan Old Style", Georgia, serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid-major) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-major) 1px, transparent 1px),
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:
+    calc(var(--cell) * 5) calc(var(--cell) * 5),
+    calc(var(--cell) * 5) calc(var(--cell) * 5),
+    var(--cell) var(--cell),
+    var(--cell) var(--cell);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--graphite);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: var(--line);
+  font-optical-sizing: auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* the page column snaps its left edge to the paper's grid */
+.page {
+  width: min(var(--page), 100% - 2 * var(--cell));
+  margin-left: var(--cell);
+}
+@supports (width: round(down, 10px, 16px)) {
+  .page { margin-left: max(var(--cell), round(down, (100% - var(--page)) / 2, var(--cell))); }
+}
+
+main { flex: 1; padding-bottom: calc(var(--cell) * 6); }
+
+a { color: var(--ink); text-decoration-thickness: 2px; text-underline-offset: 4px; text-decoration-color: var(--crayon); }
+a:hover { color: var(--crayon); }
+:focus-visible { outline: 3px dashed var(--crayon); outline-offset: 3px; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+.textures { position: absolute; width: 0; height: 0; overflow: hidden; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: -999px; top: 0; background: var(--ink); color: #fff; padding: 8px 16px; font-family: var(--font-px); z-index: 10; }
+.skip:focus { left: 16px; }
+
+/* ------------------------------------------------------------
+   masthead: stitched wordmark + menu
+   ------------------------------------------------------------ */
+.masthead { padding-top: calc(var(--cell) * 3); }
+
+.wm { display: block; margin: 0; line-height: 0; }
+.wordmark { display: block; height: auto; max-width: 100%; overflow: visible; }
+.wordmark .stitches ellipse { fill: var(--ink); }
+.wordmark .chain ellipse { fill: none; stroke: var(--crayon); stroke-width: 2.4; }
+
+/* home: the wordmark gets worked in, foundation chain first, then rows from the bottom up */
+.wm--big .st { opacity: 0; animation: stitch-in 240ms steps(2, end) forwards; animation-delay: var(--d); }
+@keyframes stitch-in { to { opacity: 1; } }
+
+.wm--small { display: inline-block; max-width: 100%; }
+.wm--small .wordmark { width: 424px; } /* exactly half size: one stitch per 8px */
+.wm--small:hover .stitches ellipse { fill: var(--crayon); }
+.wm--small g[filter] { filter: none; } /* crayon grain is too coarse at half size */
+
+.nav { margin-top: var(--cell); }
+.is-home .nav { margin-top: calc(var(--cell) * 2); }
+.nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 calc(var(--cell) * 2); }
+.nav a {
+  font-family: var(--font-px);
+  font-size: 20px;
+  line-height: var(--line);
+  color: var(--ink);
+  text-decoration: none;
+  padding-bottom: 6px;
+}
+.nav a:hover { color: var(--crayon); }
+.nav a[aria-current="page"] {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 10' preserveAspectRatio='none'%3E%3Cfilter id='c'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0.867 0 0 0 0 0.31 0 0 0 0 0.47 0 0 0 -2.6 2.3'/%3E%3CfeComposite in2='SourceGraphic' operator='in'/%3E%3C/filter%3E%3Cpath d='M2 6 C 20 2, 30 9, 48 5 S 80 2, 98 6 S 114 7, 118 4' stroke='%23000' stroke-width='4' fill='none' stroke-linecap='round' filter='url(%23c)'/%3E%3C/svg%3E") left bottom / 100% 10px no-repeat;
+}
+
+/* ------------------------------------------------------------
+   type
+   ------------------------------------------------------------ */
+.tagline {
+  font-style: italic;
+  font-size: 22px;
+  line-height: var(--line);
+  color: var(--ink-soft);
+  max-width: 30em;
+  text-wrap: pretty;
+  margin: calc(var(--cell) * 2) 0 calc(var(--cell) * 4);
+}
+
+.px-title, .px-head, .entry-title {
+  font-family: var(--font-px);
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0;
+}
+.px-title { font-size: 48px; line-height: calc(var(--cell) * 4); }
+.px-head { font-size: 22px; line-height: var(--line); margin-bottom: var(--cell); }
+.px-head a { text-decoration: none; color: inherit; }
+.px-head a:hover { color: var(--crayon); }
+
+.empty { color: var(--muted); font-style: italic; }
+
+/* ------------------------------------------------------------
+   home
+   ------------------------------------------------------------ */
+.home-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: calc(var(--cell) * 4) calc(var(--cell) * 4);
+}
+.home-listening { grid-column: 1 / -1; max-width: 36em; }
+.home-listening p { margin: 0; }
+
+/* ------------------------------------------------------------
+   entry rows (home + archive)
+   ------------------------------------------------------------ */
+.row-list { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+.row-list li { border-bottom: 1px solid var(--grid-major); }
+.row-list a {
+  display: grid;
+  grid-template-columns: calc(var(--cell) * 5) minmax(0, 1fr) auto;
+  column-gap: var(--cell);
+  padding: var(--cell) 0 calc(var(--cell) - 1px);
+  text-decoration: none;
+  color: var(--graphite);
+}
+.row-no { font-family: var(--font-px); font-size: 16px; color: var(--crayon); }
+.row-title { font-size: 20px; font-weight: 500; color: var(--ink); }
+.row-date { color: var(--muted); font-size: 16px; white-space: nowrap; }
+.row-summary { grid-column: 2 / -1; color: var(--muted); font-size: 17px; }
+.row-list a:hover .row-title { color: var(--crayon); }
+.row-list a:hover { background: linear-gradient(transparent 55%, rgba(255, 226, 122, 0.55) 55%, rgba(255, 226, 122, 0.55) 85%, transparent 85%) no-repeat 0 0 / 100% var(--line); }
+.row-list--full { max-width: 44em; }
+
+/* ------------------------------------------------------------
+   shelves: each item is a yarn ball band
+   ------------------------------------------------------------ */
+.shelf + .shelf { margin-top: calc(var(--cell) * 5); }
+.bands {
+  list-style: none; margin: 0; padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
+  gap: var(--cell);
+}
+.bands--compact { grid-template-columns: 1fr; }
+
+.band {
+  display: grid;
+  grid-template-columns: calc(var(--cell) * 3) minmax(0, 1fr);
+  gap: var(--cell);
+  align-items: start;
+  padding: var(--cell);
+  background: var(--paper-white);
+  /* a border drawn as four offset shadows leaves the corner pixels empty: stepped corners */
+  box-shadow: 2px 0 0 var(--ink), -2px 0 0 var(--ink), 0 2px 0 var(--ink), 0 -2px 0 var(--ink);
+  margin: 2px;
+}
+.band-icon {
+  display: grid; place-items: center;
+  width: calc(var(--cell) * 3); height: calc(var(--cell) * 3);
+  background: var(--paper);
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 6px 6px;
+  outline: 1px solid var(--grid-major);
+  color: var(--crayon);
+}
+.px-icon { width: 32px; height: 32px; fill: currentColor; }
+.band--show .band-icon, .band--film .band-icon { color: var(--ink); }
+.band-body > * { margin: 0; }
+.band-title { font-size: 19px; font-weight: 500; line-height: 24px; color: var(--ink); padding-top: 2px; }
+.band-by { font-style: italic; color: var(--muted); font-size: 16px; line-height: 24px; }
+.band-progress {
+  display: inline-block;
+  margin-top: 6px !important;
+  font-family: var(--font-px); font-size: 14px; line-height: 20px;
+  padding: 0 6px;
+  color: var(--graphite);
+  background: var(--wax);
+}
+.band-note { font-size: 16px; line-height: 24px; color: var(--graphite); margin-top: 8px !important; }
+
+/* ------------------------------------------------------------
+   pages + entries
+   ------------------------------------------------------------ */
+.sheet, .entry { padding-top: calc(var(--cell) * 4); }
+.sheet-head, .entry-head { margin-bottom: calc(var(--cell) * 3); max-width: 40em; }
+.sheet-intro { font-style: italic; color: var(--ink-soft); font-size: 20px; margin: var(--cell) 0 0; }
+
+.row-tag { font-family: var(--font-px); color: var(--crayon); margin: 0; font-size: 18px; }
+.entry-title { font-size: 48px; line-height: calc(var(--cell) * 4); }
+.entry-meta { margin: var(--cell) 0 0; color: var(--muted); font-size: 16px; }
+.entry-meta > * + * { margin-left: calc(var(--cell) * 2); }
+.entry-listening { font-style: italic; }
+
+/* the foundation chain, used as a divider */
+.entry-head::after, .prose hr {
+  content: "";
+  display: block;
+  height: var(--cell);
+  margin-top: calc(var(--cell) * 2);
+  border: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Cellipse cx='8' cy='8' rx='6.6' ry='3.6' fill='none' stroke='%23dd4f78' stroke-width='2.2'/%3E%3C/svg%3E") left center / 16px 16px repeat-x;
+  max-width: calc(var(--cell) * 24);
+}
+
+.prose { max-width: 36em; }
+.prose > * { margin: 0 0 var(--line); }
+.prose h2, .prose h3 { font-family: var(--font-px); font-weight: 500; color: var(--ink); margin-top: calc(var(--line) * 1.5); margin-bottom: var(--cell); }
+.prose h2 { font-size: 26px; line-height: var(--line); }
+.prose h3 { font-size: 21px; line-height: var(--line); }
+.prose ul, .prose ol { padding-left: calc(var(--cell) * 2); }
+.prose ul { list-style: square; }
+.prose li::marker { color: var(--crayon); }
+.prose blockquote {
+  margin-left: 0;
+  padding: var(--cell) calc(var(--cell) * 2);
+  font-style: italic;
+  color: var(--ink);
+  background: var(--paper-white);
+  border-left: 6px solid var(--crayon);
+}
+.prose blockquote p { margin: 0; }
+.prose img { margin: var(--line) 0; border: 2px solid var(--ink); }
+.prose code { font-size: 0.9em; background: var(--paper-white); padding: 1px 4px; border: 1px solid var(--grid-major); }
+.sheet .prose, .sheet > p { max-width: 36em; }
+.sheet > p { margin: 0 0 var(--line); }
+
+.entry-nav {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--cell);
+  margin-top: calc(var(--cell) * 5);
+  max-width: 36em;
+}
+.entry-nav a { text-decoration: none; font-size: 19px; font-weight: 500; }
+.entry-nav span { display: block; font-family: var(--font-px); font-size: 15px; color: var(--crayon); font-weight: 400; }
+.entry-nav .newer { margin-left: auto; text-align: right; }
+
+/* ------------------------------------------------------------
+   listening
+   ------------------------------------------------------------ */
+.player { max-width: 40em; margin-bottom: var(--cell); }
+.player iframe { display: block; border-radius: 12px; }
+.player--empty {
+  padding: calc(var(--cell) * 3) calc(var(--cell) * 2);
+  border: 2px dashed var(--grid-major);
+  background: rgba(255, 255, 255, 0.6);
+}
+.player--empty .empty { margin: 0; }
+
+/* ------------------------------------------------------------
+   elsewhere: big pixel buttons
+   ------------------------------------------------------------ */
+.elsewhere { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: calc(var(--cell) * 2); }
+.elsewhere a {
+  display: block;
+  min-width: calc(var(--cell) * 16);
+  padding: var(--cell) calc(var(--cell) * 1.5);
+  background: var(--paper-white);
+  border: 2px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+  text-decoration: none;
+  transition: transform 80ms steps(2), box-shadow 80ms steps(2);
+}
+.elsewhere a:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--crayon); }
+.elsewhere a:active { transform: translate(4px, 4px); box-shadow: 0 0 0 var(--ink); }
+.els-label { display: block; font-family: var(--font-px); font-size: 28px; line-height: var(--line); color: var(--ink); }
+.els-handle { display: block; font-style: italic; color: var(--muted); }
+
+/* ------------------------------------------------------------
+   gallery
+   ------------------------------------------------------------ */
+.gallery { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(256px, 1fr)); gap: calc(var(--cell) * 2); }
+.piece figure { margin: 0; background: var(--paper-white); padding: var(--cell); border: 2px solid var(--ink); }
+.piece img { aspect-ratio: 1; object-fit: cover; width: 100%; }
+.piece figcaption { margin-top: var(--cell); line-height: 24px; }
+.piece-title { display: block; font-weight: 500; color: var(--ink); }
+.piece-note { display: block; font-style: italic; color: var(--muted); font-size: 16px; }
+
+/* ------------------------------------------------------------
+   footer: lace trim hanging over a blueprint band
+   ------------------------------------------------------------ */
+.footer { background: var(--ink); color: #dfe7fb; margin-top: auto; }
+.lace { height: 88px; line-height: 0; }
+.lace svg { width: 100%; height: 88px; display: block; }
+.lace-body { fill: var(--paper-white); stroke: var(--ink); stroke-width: 1.5; }
+.lace-holes circle { fill: var(--ink); }
+.lace-rule { stroke: var(--ink); stroke-width: 1; fill: none; stroke-dasharray: 3 2; }
+.lace-picots circle { fill: var(--paper-white); stroke: var(--ink); stroke-width: 1.2; }
+.lace-words { font-family: var(--font-px); font-size: 13px; fill: var(--ink); letter-spacing: 1px; }
+.footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: var(--cell); padding: calc(var(--cell) * 2) 0 calc(var(--cell) * 3); }
+.footer-links { list-style: none; margin: 0; padding: 0; display: flex; gap: calc(var(--cell) * 2); }
+.footer-links a { color: #fff; font-family: var(--font-px); text-decoration-color: var(--wax); }
+.footer-links a:hover { color: var(--wax); }
+.footer-note { margin: 0; font-style: italic; font-size: 16px; }
+
+/* ------------------------------------------------------------
+   small screens
+   ------------------------------------------------------------ */
+@media (max-width: 760px) {
+  .masthead { padding-top: calc(var(--cell) * 2); }
+  .wm--small .wordmark { width: 318px; }
+  .nav ul { gap: 0 calc(var(--cell) * 1.25); }
+  .nav a { font-size: 18px; }
+  .tagline { font-size: 20px; margin-bottom: calc(var(--cell) * 3); }
+  .home-grid { grid-template-columns: 1fr; gap: calc(var(--cell) * 3); }
+  .px-title, .entry-title { font-size: 38px; line-height: calc(var(--cell) * 3); }
+  .row-list a { grid-template-columns: calc(var(--cell) * 4) minmax(0, 1fr); }
+  .row-date { grid-column: 2; }
+  .row-summary { grid-column: 2; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wm--big .st { animation: none; opacity: 1; }
+  .elsewhere a { transition: none; }
+}
+
+@media print {
+  html { background: none; }
+  .nav, .footer, .skip { display: none; }
+}

@@ -1,0 +1,16 @@
+---
+layout: page
+title: elsewhere
+permalink: /elsewhere/
+intro: Where else to find me.
+---
+<ul class="elsewhere">
+  {% for link in site.links %}
+    <li>
+      <a href="{{ link.url }}" rel="me noopener" target="_blank">
+        <span class="els-label">{{ link.label }}</span>
+        <span class="els-handle">{{ link.handle }}</span>
+      </a>
+    </li>
+  {% endfor %}
+</ul>

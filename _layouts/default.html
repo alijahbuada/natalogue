@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description" content="{% if page.summary %}{{ page.summary | strip_html | escape }}{% else %}{{ site.description | escape }}{% endif %}">
+  <meta name="theme-color" content="#f8fafd">
+  <link rel="icon" href="{{ '/assets/img/favicon.svg' | relative_url }}" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Pixelify+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body class="{% if page.url == '/' %}is-home{% endif %}">
+  {% include textures.svg %}
+  <a class="skip" href="#main">skip to content</a>
+
+  <div class="page">
+    <header class="masthead">
+      {% if page.url == '/' %}
+        <h1 class="wm wm--big">{% include wordmark.svg %}</h1>
+      {% else %}
+        <a class="wm wm--small" href="{{ '/' | relative_url }}" aria-label="natalogue home">{% include wordmark.svg %}</a>
+      {% endif %}
+      {% include nav.html %}
+    </header>
+
+    <main id="main">
+      {{ content }}
+    </main>
+  </div>
+
+  <footer class="footer">
+    {% include lace.html %}
+    <div class="footer-inner page">
+      <ul class="footer-links">
+        {% for link in site.links %}
+          <li><a href="{{ link.url }}" rel="me noopener" target="_blank">{{ link.label }}</a></li>
+        {% endfor %}
+      </ul>
+      <p class="footer-note">natalogue, kept by {{ site.author }}</p>
+    </div>
+  </footer>
+</body>
+</html>

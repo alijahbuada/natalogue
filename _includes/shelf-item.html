@@ -1,0 +1,11 @@
+{% assign t = include.item.type | default: "other" | downcase %}
+{% unless site.media_types contains t %}{% assign t = "other" %}{% endunless %}
+<li class="band band--{{ t }}">
+  <span class="band-icon" title="{{ t }}">{% include icons/{{ t }}.svg %}<span class="sr-only">{{ t }}:</span></span>
+  <div class="band-body">
+    <h3 class="band-title">{{ include.item.title }}</h3>
+    {% if include.item.by %}<p class="band-by">{{ include.item.by }}</p>{% endif %}
+    {% if include.item.progress %}<p class="band-progress">{{ include.item.progress }}</p>{% endif %}
+    {% if include.item.note %}<p class="band-note">{{ include.item.note }}</p>{% endif %}
+  </div>
+</li>

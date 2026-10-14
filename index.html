@@ -1,0 +1,46 @@
+---
+layout: default
+---
+{% assign entries = site.entries | sort: "date" | reverse %}
+{% assign total = entries | size %}
+
+<p class="tagline">{{ site.tagline }}</p>
+
+<div class="home-grid">
+  <section class="home-block home-entries" aria-labelledby="h-entries">
+    <h2 id="h-entries" class="px-head"><a href="{{ '/entries/' | relative_url }}">latest entries</a></h2>
+    {% if total > 0 %}
+      <ol class="row-list">
+        {% for entry in entries limit: 3 %}
+          <li>
+            <a href="{{ entry.url | relative_url }}">
+              <span class="row-no">row {{ total | minus: forloop.index0 }}</span>
+              <span class="row-title">{{ entry.title }}</span>
+              <time class="row-date" datetime="{{ entry.date | date: '%Y-%m-%d' }}">{{ entry.date | date: "%b %-d" }}</time>
+            </a>
+          </li>
+        {% endfor %}
+      </ol>
+    {% else %}
+      <p class="empty">The first entry is still on the hook.</p>
+    {% endif %}
+  </section>
+
+  <section class="home-block home-shelf" aria-labelledby="h-shelf">
+    <h2 id="h-shelf" class="px-head"><a href="{{ '/shelves/' | relative_url }}">on the shelf right now</a></h2>
+    <ul class="bands bands--compact">
+      {% for item in site.data.shelves.currently limit: 3 %}
+        {% include shelf-item.html item=item %}
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section class="home-block home-listening" aria-labelledby="h-listen">
+    <h2 id="h-listen" class="px-head"><a href="{{ '/listening/' | relative_url }}">currently listening</a></h2>
+    {% if site.playlist_url != "" %}
+      <p>An ever-growing playlist. <a href="{{ site.playlist_url }}" target="_blank" rel="noopener">Open it in Spotify</a> or <a href="{{ '/listening/' | relative_url }}">play it here</a>.</p>
+    {% else %}
+      <p class="empty">The playlist is still being stitched together.</p>
+    {% endif %}
+  </section>
+</div>
