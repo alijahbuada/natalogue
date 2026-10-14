@@ -7,7 +7,7 @@
 
 title: natalogue
 
-url: "https://alijahbuada.github.io"   # test host; change when it moves to Nat
+url: "https://nnonacf.github.io"   # test host; change when it moves to Nat
 baseurl: "/natalogue"   # repo name; set to "" if the repo is <username>.github.io
 
 future: true      # entries dated later today (time zones!) still publish
