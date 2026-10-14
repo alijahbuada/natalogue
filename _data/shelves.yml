@@ -1,33 +1,23 @@
-# ============================================================
-#  natalogue · shelves
-#  Two shelves: "currently" (what you're in the middle of) and
-#  "favorites" (the keepers). Each item starts with a dash.
-#
-#  title:    required
-#  type:     book, show, film, music, game, podcast, or other
-#  by:       author / creator / studio (optional)
-#  progress: how far along you are, like "ep 4 of 12" (optional, currently only)
-#  note:     a line about it, in your words (optional)
-#
-#  The items below are samples. Replace them with your own.
-# ============================================================
-
 currently:
-  - title: the book on your nightstand
+  - title: Hidden Bodies
     type: book
-    by: its author
-    progress: page 112
-    note: a line about why you picked it up
-  - title: the show you're halfway through
-    type: show
-    by: who made it
-    progress: season 1, ep 6
-    note: who you're watching it with, or what it reminds you of
+    by: Caroline Kepnes
+    progress: 10%
+    note: joe goldberg i'd hate u sooo much irl. unfortunately, you're an antisocial
+      unreliable narrator and i see myself thinking what you're saying. besides
+      the misogyny of course... anyway, i'm hooked and now on book 2 of Caroline
+      Kepnes' viral viral series, You.
+  - title: Bunny
+    type: book
+    by: Mona Awad
+    progress: 22%
+    note: a psych black comedy on female loneliness that's been on my wishlist for
+      FOREVER. thanks for the b&n giftcard, jasmine! you're keeping mah brain
+      alive ^^
   - title: the next one in the stack
     type: book
     by: its author
     progress: just started
-
 favorites:
   - title: a book you'd press into a friend's hands
     type: book
