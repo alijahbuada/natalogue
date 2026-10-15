@@ -22,7 +22,6 @@ why do i feel like i NEED to you may wonder?
 
 because my brain and emotions are insanely unregulated.   
 
-
 by being mindful, by being as *totally* and *completely aware* of myself as i can be … that’s my key to *actually living* in my own life. not in photographs referencing moments in time i can’t recall, not sweating and stumbling through every unscripted interaction with a stranger … but to be present. to be in my own skin, ***my own natalihn skin***, and be okay with it … :)
 
 now i’m off to consume my mindfulness lessons the only way my dopamine receptors will want to … through the guidance of winnie the pooh <3
@@ -33,5 +32,12 @@ thank you a kaljillion times to my amazingly talented, creative friend aj for se
 
 
 
+&nbsp;
+
 > *here’s to growing on the vine AND branching out. here’s to holding your childhood self’s hand through the tough adult moments. here’s to living authentically with bravery. here’s to us !*
 
+
+
+&nbsp;
+
+&nbsp;
