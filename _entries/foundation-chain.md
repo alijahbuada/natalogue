@@ -30,14 +30,8 @@ now i’m off to consume my mindfulness lessons the only way my dopamine recepto
 
 thank you a kaljillion times to my amazingly talented, creative friend aj for setting up this little custom space on the internet for me! because of aj, i finally feel ready to share myself with you! whoever you are, reader. almost scarily, aj seemed to suddenly know that i wanted to curate a blog and … well here we are! so thank you thank you aj for gifting me an outlet. my thoughts have finally been put in the correct soil and now i can flourish !
 
-
-
-&nbsp;
-
 > *here’s to growing on the vine AND branching out. here’s to holding your childhood self’s hand through the tough adult moments. here’s to living authentically with bravery. here’s to us !*
 
 
-
-&nbsp;
 
 &nbsp;
